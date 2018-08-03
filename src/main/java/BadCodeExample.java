@@ -3,9 +3,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import java.util.List;
-
 import static java.lang.Thread.sleep;
 
 public class BadCodeExample {
@@ -16,22 +14,33 @@ public class BadCodeExample {
         WebElement queryField = browser.findElement(By.name("q"));
         queryField.sendKeys("selenium");
         queryField.sendKeys(Keys.ENTER);
+        sleep(2000);
         //Verify that results list contains 10 elements
-        sleep(3000);
         List<WebElement> searchResults = browser.findElements(By.xpath("//div[@class='srg']/div[@class='g']"));
+
         System.out.println("Results count: "+searchResults.size());
-        //ДЗ: добавить проверку если результатов 10 - все правильно, если не 10 - не правильно
-        //Verify that each result item contains searchterm
+
+        if (searchResults.size() == 10) {
+            System.out.println("Results count is correct");
+        }
+        else {
+            System.out.println("Results count is incorrect");
+        }
+
+        //Verify that each result item contains searchterm "Selenium"
+        //for each searchResult in searchResult List
         for (WebElement searchResult: searchResults) {
             String searchResultText = searchResult.getText();
             System.out.println(searchResultText);
-            //ДЗ: добавить проверку присутствует ли searchterm (силениум) - ОК, если не присутствует - не ОК
+
+            if(searchResultText.toLowerCase().contains("selenium")) {
+                System.out.println("SearchTerm Found");
+            }
+            else {
+                System.out.println("SearchTerm Mot Found");
+            }
         }
-
-
-
-
-        sleep(3000);
+        sleep(2000);
         browser.close();
     }
 }
