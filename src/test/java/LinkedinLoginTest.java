@@ -3,42 +3,46 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static java.lang.Thread.sleep;
 
 public class LinkedinLoginTest {
 
+    WebDriver browser;
 
-    @Test
-    public void successfulLoginTest () {
-        WebDriver browser = new FirefoxDriver();
-        // maximize the browser window
-        browser.manage().window().maximize();
+    @BeforeMethod
+    public void beforeMethod() {
+        browser = new FirefoxDriver();
         browser.get("https://www.linkedin.com/");
-        WebElement userEmailField = browser.findElement(By.xpath("//input[@id ='login-email']"));
-        WebElement userPasswordField = browser.findElement(By.xpath("//input[@id='login-password']"));
-        WebElement signInButton = browser.findElement(By.xpath("//input[@id='login-submit']"));
+    }
 
-        userEmailField.sendKeys("rdmntest@gmail.com");
-        userPasswordField.sendKeys("July222@");
-        signInButton.click();
-
-        //url verification
-        String url = browser.getCurrentUrl();
-        Assert.assertEquals(url, "https://www.linkedin.com/feed/" ,"Invalid URL");
-
-        //title verification
-        String title = browser.getTitle();
-        Assert.assertEquals(title,"LinkedIn", "Invalid title");
-
-        //upgrade button verification
-        WebElement upgradeButton = browser.findElement(By.xpath("//a[@data-control-name='premium_nav_upsell_text_click']"));
-        Assert.assertEquals(upgradeButton.getText(), "Free Upgrade to Premium","Alert box has incorrect message.");
+    @AfterMethod
+    public void afterMethod() {
+        browser.close();
     }
 
     @Test
-    public void negativeLoginTest () {
-        WebDriver browser = new FirefoxDriver();
-        browser.get("https://www.linkedin.com/");
+    public void successfulLoginTest() throws InterruptedException {
+
+        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
+        linkedinLoginPage.login("rdmntest@gmail.com","July222@");
+
+        sleep(2000);
+
+        String pageUrl = browser.getCurrentUrl();
+        String pageTitle = browser.getTitle();
+        WebElement profileNavigationItem = browser.findElement(By.xpath("//li[@id='profile-nav-item']"));
+
+        Assert.assertEquals(pageTitle,"LinkedIn", "Home page Title is wrong.");
+        Assert.assertEquals(pageUrl, "https://www.linkedin.com/feed/" ,"Home page URL is wrong.");
+        Assert.assertTrue(profileNavigationItem.isDisplayed(), "'profileNavigationItem' is not displayed on Home Page");
+    }
+
+    @Test
+    public void negativeLoginTest() throws InterruptedException {
         WebElement userEmailField = browser.findElement(By.xpath("//input[@id ='login-email']"));
         WebElement userPasswordField = browser.findElement(By.xpath("//input[@id='login-password']"));
         WebElement signInButton = browser.findElement(By.xpath("//input[@id='login-submit']"));
@@ -50,6 +54,8 @@ public class LinkedinLoginTest {
         WebElement alertBox = browser.findElement(By.xpath("//*[@role='alert']"));
         Assert.assertEquals(alertBox.getText(), "There were one or more errors in your submission. Please correct the marked fields below.",
                 "Alert box has incorrect message.");
+
+        sleep(2000);
     }
 
 }
