@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 public class LinkedinLoginPage {
 
     WebDriver browser;
-
     WebElement userEmailField;
     WebElement userPasswordField;
     WebElement signInButton;
