@@ -12,11 +12,13 @@ import static java.lang.Thread.sleep;
 public class LinkedinLoginTest {
 
     WebDriver browser;
+    LinkedinLoginPage linkedinLoginPage;
 
     @BeforeMethod
     public void beforeMethod() {
         browser = new FirefoxDriver();
         browser.get("https://www.linkedin.com/");
+        linkedinLoginPage = new LinkedinLoginPage(browser);
     }
 
     @AfterMethod
@@ -25,39 +27,20 @@ public class LinkedinLoginTest {
     }
 
     @Test
-    public void successfulLoginTest() throws InterruptedException {
-
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
+    public void successfulLoginTest() {
         linkedinLoginPage.login("rdmntest@gmail.com","July222@");
 
-        sleep(2000);
-
-        String pageUrl = browser.getCurrentUrl();
-        String pageTitle = browser.getTitle();
-
         LinkedinHomePage linkedinHomePage = new LinkedinHomePage(browser);
-        linkedinHomePage.isProfileNavigationItemDisplayed();
-
-        Assert.assertEquals(pageTitle,"LinkedIn", "Home page Title is wrong.");
-        Assert.assertEquals(pageUrl, "https://www.linkedin.com/feed/" ,"Home page URL is wrong.");
-        Assert.assertTrue(linkedinHomePage.isProfileNavigationItemDisplayed(), "'profileNavigationItem' is not displayed on Home Page");
+        Assert.assertTrue(linkedinHomePage.isLoaded(),"Home page is not loaded.");
     }
 
     @Test
-    public void negativeLoginTest() throws InterruptedException {
-        WebElement userEmailField = browser.findElement(By.xpath("//input[@id ='login-email']"));
-        WebElement userPasswordField = browser.findElement(By.xpath("//input[@id='login-password']"));
-        WebElement signInButton = browser.findElement(By.xpath("//input[@id='login-submit']"));
+    public void negativeLoginTest() {
+        linkedinLoginPage.login("a@b/c","kek");
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
 
-        userEmailField.sendKeys("a@b/c");
-        userPasswordField.sendKeys("kek");
-        signInButton.click();
-
-        WebElement alertBox = browser.findElement(By.xpath("//*[@role='alert']"));
-        Assert.assertEquals(alertBox.getText(), "There were one or more errors in your submission. Please correct the marked fields below.",
+        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
+                "There were one or more errors in your submission. Please correct the marked fields below.",
                 "Alert box has incorrect message.");
-
-        sleep(2000);
     }
-
 }
