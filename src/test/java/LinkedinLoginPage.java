@@ -33,4 +33,8 @@ public class LinkedinLoginPage {
             e.printStackTrace();
         }
     }
+
+    public boolean signInButtonIsDisabled() {
+        return signInButton.isEnabled();
+    }
 }
