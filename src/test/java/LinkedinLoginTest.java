@@ -148,7 +148,7 @@ public class LinkedinLoginTest {
                 "Session key login error is wrong.");
     }
 
-    //Verification of disabled SUBMIT button
+    //Verification of disabled SUBMIT button in case of empty login and password fields
     @Test
     public void negativeLoginTestButtonIsDisabled() {
         linkedinLoginPage.login("","");
