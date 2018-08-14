@@ -34,7 +34,20 @@ public class LinkedinLoginPage {
         }
     }
 
-    public boolean signInButtonIsDisabled() {
+    public boolean isSignInButtonIsDisabled() {
         return signInButton.isEnabled();
+    }
+
+    public String getCurrentPageTitle() {
+        return browser.getTitle();
+    }
+
+    public String getCurrentPageUrl() {
+        return browser.getCurrentUrl();
+    }
+
+    public boolean isLoaded() {
+        return userEmailField.isDisplayed()
+                && getCurrentPageTitle().contains("LinkedIn: Log In or Sign Up");
     }
 }
