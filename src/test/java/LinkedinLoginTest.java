@@ -33,7 +33,7 @@ public class LinkedinLoginTest {
         return new Object[][]{
                 {"rdmntest@gmail.com", "July222@"},
                 {"RDMNTEST@gmail.com", "July222@"},
-                {"rDmNTEST@gmail.coM", "July222@"}
+                {"rDmNtEST@gmail.coM", "July222@"}
         };
     }
 
