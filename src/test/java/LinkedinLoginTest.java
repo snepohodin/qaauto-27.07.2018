@@ -9,8 +9,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static java.lang.Thread.sleep;
-
 public class LinkedinLoginTest {
 
     WebDriver browser;
@@ -69,23 +67,48 @@ public class LinkedinLoginTest {
         Assert.assertTrue(linkedinLoginPage.isLoaded(),"User is not on Login page.");
     }
 
-    @Test
-    public void validateShortUserEmailAndPassword() {
-        linkedinLoginPage.login("a","a");
+    @DataProvider
+    public Object[][] incorrectFieldsCombination() {
+        return new Object[][]{
+                {"a", "a", "The text you provided is too short (the minimum length is 3 characters, your text contains 1 character).", "The password you provided must have at least 6 characters."},
+                {"aadwsdftgy@gmail.comaadwsdftgy@gmail.comaadwsdftgy@gmail.comaadwsdftgy@gmail.comaadwsdftgy@gmail.comasssssssssadwsdftgy@gmail.com", "111111111111","The text you provided is too long (the maximum length is 128 characters, your text contains 129 characters).",""},
+                {"rdmntest@gmail.com", "JULY222@","", "Hmm, that's not the right password. Please try again or request a new one."},
+                {"+380954885956", "July222@", "Hmm, we don't recognize that email. Please try again.", ""},
+                {"<script>alert(123)</script>", "1", "Please enter a valid email address.", "The password you provided must have at least 6 characters."},
+                {"1", "111111111111", "Be sure to include \"+\" and your country code.", ""}
+        };
+    }
+
+    @Test (dataProvider = "incorrectFieldsCombination")
+    public void validateShortUserEmailAndPassword(String userEmail, String userPass, String expectedLoginError, String expectedPassError) {
+        linkedinLoginPage.login(userEmail, userPass);
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         Assert.assertTrue(linkedinLoginSubmitPage.isLoaded(),"User is not on LoginSubmit page");
 
         Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
                 "There were one or more errors in your submission. Please correct the marked fields below.",
                 "Alert box has incorrect message.");
 
-        Assert.assertEquals(linkedinLoginSubmitPage.getUserEmailValidationText(),
-                "The text you provided is too short (the minimum length is 3 characters, your text contains 1 character).",
+        Assert.assertEquals(linkedinLoginSubmitPage.getUserEmailValidationText(), expectedLoginError,
                 "userEmail field has wrong validation message text.");
 
-        Assert.assertEquals(linkedinLoginSubmitPage.getUserPasswordValidationText(),
-                "The password you provided must have at least 6 characters.",
+        Assert.assertEquals(linkedinLoginSubmitPage.getUserPasswordValidationText(), expectedPassError,
                 "userPassword field has wrong validation message text.");
+
+//        Assert.assertEquals(linkedinLoginSubmitPage.getUserEmailValidationText(),
+//                "The text you provided is too short (the minimum length is 3 characters, your text contains 1 character).",
+//                "userEmail field has wrong validation message text.");
+//
+//        Assert.assertEquals(linkedinLoginSubmitPage.getUserPasswordValidationText(),
+//                "The password you provided must have at least 6 characters.",
+//                "userPassword field has wrong validation message text.");
     }
 
     //Verification of 'Not the right password' error message
