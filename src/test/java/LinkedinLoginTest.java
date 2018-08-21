@@ -105,7 +105,6 @@ public class LinkedinLoginTest {
         linkedinSearchPage.scrollDown();
 
         Assert.assertTrue(linkedinSearchPage.searchResultsCount(),"There are no 10 search results.");
-
-        Assert.assertTrue(linkedinSearchPage.searchVerify(),"There are no 'hr' searchterm here.");
+        Assert.assertTrue(linkedinSearchPage.searchTermVerification(),"There are no 'hr' searchterm here");
     }
 }

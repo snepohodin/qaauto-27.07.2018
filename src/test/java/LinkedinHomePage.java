@@ -29,7 +29,7 @@ public class LinkedinHomePage extends BasePage {
     public LinkedinSearchPage homePageReturnSearchPage(String searchInputField) {
         searchBox.sendKeys(searchInputField, Keys.ENTER);
         try {
-            sleep(3000);
+            sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

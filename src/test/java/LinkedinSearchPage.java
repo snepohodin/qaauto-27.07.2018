@@ -36,7 +36,7 @@ public class LinkedinSearchPage extends BasePage {
         }
     }
 
-    public boolean searchVerify() {
+    public boolean searchTermVerification() {
         for(WebElement searchResult : searchResults){
                 if(searchResult.getText().toLowerCase().contains("hr"))
                     return true;
