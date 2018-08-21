@@ -37,7 +37,7 @@ public class BadCodeExample {
                 System.out.println("SearchTerm Found");
             }
             else {
-                System.out.println("SearchTerm Mot Found");
+                System.out.println("SearchTerm Not Found");
             }
         }
         sleep(2000);

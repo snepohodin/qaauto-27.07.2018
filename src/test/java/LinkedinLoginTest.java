@@ -6,6 +6,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
+import static java.lang.Thread.sleep;
+
 public class LinkedinLoginTest {
 
     WebDriver browser;
@@ -26,8 +30,9 @@ public class LinkedinLoginTest {
     @DataProvider
     public Object[][] validFieldsCombination() {
         return new Object[][]{
-                {"rdmntest@gmail.com", "July222@"},
-                {"rDmNtEST@gmail.coM", "July222@"}
+                {"rdmntest@gmail.com", "July222@"}
+//                ,
+//                {"rDmNtEST@gmail.coM", "July222@"}
         };
     }
 
@@ -41,9 +46,9 @@ public class LinkedinLoginTest {
     @DataProvider
     public Object[][] emptyFieldsCombination() {
         return new Object[][]{
-                {"", ""},
-                {"", "P@ssword123"},
-                {"someone@domain.com", ""}
+                {"",""},
+                {"","P@ssword123"},
+                {"someone@domain.com",""}
         };
     }
 
@@ -89,106 +94,22 @@ public class LinkedinLoginTest {
                 "userPassword field has wrong validation message text.");
     }
 
-//
-//    @Test
-//    public void negativeLoginTestNotRightPasswordErrorText() {
-//        linkedinLoginPage.login("rdmntest@gmail.com","JULY222@");
-//        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-//
-//        Assert.assertEquals(linkedinLoginSubmitPage.getSessionPasswordLoginErrorText(),
-//                "Hmm, that's not the right password. Please try again or request a new one.",
-//                "Alert box has incorrect message.");
-//    }
-//
-//    @Test
-//    public void negativeLoginCantRecognizeLoginText() {
-//        linkedinLoginPage.login("+380954885956","July222@");
-//        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-//
-//        Assert.assertEquals(linkedinLoginSubmitPage.getSessionKeyLoginErrorText(),
-//                "Hmm, we don't recognize that email. Please try again.",
-//                "Session key login error is wrong.");
-//    }
-//
-//    @Test
-//    public void negativeLoginTestbeSureToIncludeLoginErrorText() {
-//        linkedinLoginPage.login("1","111111111111");
-//        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-//
-//        Assert.assertEquals(linkedinLoginSubmitPage.getSessionKeyLoginErrorText(),
-//                "Be sure to include \"+\" and your country code.",
-//                "Session key login error is wrong.");
-//    }
-//
-//    @Test
-//    public void negativeLoginTestOneSymbolPassword() {
-//        linkedinLoginPage.login("1","1");
-//        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-//
-//        Assert.assertEquals(linkedinLoginSubmitPage.getSessionPasswordLoginErrorText(),
-//                "The password you provided must have at least 6 characters.",
-//                "Password login error text is wrong.");
-//    }
-//
-//    @Test
-//    public void negativeLoginTestFiveSymbolPassword() {
-//        linkedinLoginPage.login("1","12345");
-//        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-//
-//        Assert.assertEquals(linkedinLoginSubmitPage.getSessionPasswordLoginErrorText(),
-//                "The password you provided must have at least 6 characters.",
-//                "Password login error text is wrong.");
-//    }
-//
-//    @Test
-//    public void negativeLoginTestSixSymbolPassword() {
-//        linkedinLoginPage.login("1","123456");
-//        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-//
-//        Assert.assertEquals(linkedinLoginSubmitPage.getSessionPasswordLoginErrorText(),
-//                "", "Password login error text isn't empty.");
-//    }
-//
-//    @Test
-//    public void negativeLoginTestTextTooShort() {
-//        linkedinLoginPage.login("a","111111111111");
-//        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-//
-//        Assert.assertEquals(linkedinLoginSubmitPage.getSessionKeyLoginErrorText(),
-//                "The text you provided is too short (the minimum length is 3 characters, your text contains 1 character).",
-//                "Session key login error is wrong.");
-//    }
-//
-//    @Test
-//    public void negativeLoginTestXss() {
-//        linkedinLoginPage.login("<script>alert(123)</script>","1");
-//        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-//
-//        Assert.assertEquals(linkedinLoginSubmitPage.getSessionKeyLoginErrorText(),
-//                "Please enter a valid email address.",
-//                "Alert box has incorrect message.");
-//        Assert.assertEquals(linkedinLoginSubmitPage.getSessionPasswordLoginErrorText(),
-//                "The password you provided must have at least 6 characters.",
-//                "Password login error text is wrong.");
-//    }
-//
-//    @Test
-//    public void negativeLoginTestTextTooLong() {
-//        linkedinLoginPage.login(
-//                "aadwsdftgy@gmail.comaadwsdftgy@gmail.comaadwsdftgy@gmail.comaadwsdftgy@gmail.comaadwsdftgy@gmail.comasssssssssadwsdftgy@gmail.com",
-//                "111111111111");
-//        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-//
-//        Assert.assertEquals(linkedinLoginSubmitPage.getSessionKeyLoginErrorText(),
-//                "The text you provided is too long (the maximum length is 128 characters, your text contains 129 characters).",
-//                "Session key login error is wrong.");
-//    }
-//
-//    @Test
-//    public void negativeLoginTestButtonIsDisabled() {
-//        linkedinLoginPage.login("","");
-//        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
-//
-//        Assert.assertFalse(linkedinLoginPage.isSignInButtonIsDisabled(),"Button is enabled");
-//    }
+    @Test(dataProvider = "validFieldsCombination")
+    public void validateSearchField(String userEmail, String userPass) {
+        linkedinLoginPage.loginReturnHomePage(userEmail, userPass);
+        LinkedinHomePage linkedinHomePage = new LinkedinHomePage(browser);
+
+        Assert.assertTrue(linkedinHomePage.isLoaded(), "Home page is not loaded.");
+
+        linkedinHomePage.homePageReturnSearchPage("hr");
+        LinkedinSearchPage linkedinSearchPage = new LinkedinSearchPage(browser);
+
+        Assert.assertTrue(linkedinSearchPage.isLoaded(),"Search page is not loaded.");
+
+        linkedinSearchPage.scrollDown();
+
+        Assert.assertTrue(linkedinSearchPage.searchResultsCount(),"There are no 10 search results.");
+
+        Assert.assertTrue(linkedinSearchPage.searchVerify(),"There are no 'hr' searchterm here.");
+    }
 }
