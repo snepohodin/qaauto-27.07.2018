@@ -26,7 +26,7 @@ public class LinkedinLoginPage extends BasePage {
         userPasswordField.sendKeys(userPass);
         signInButton.click();
         try {
-            sleep(3000);
+            sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class LinkedinLoginPage extends BasePage {
         userPasswordField.sendKeys(userPass);
         signInButton.click();
         try {
-            sleep(3000);
+            sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -50,7 +50,7 @@ public class LinkedinLoginPage extends BasePage {
         userPasswordField.sendKeys(userPass);
         signInButton.click();
         try {
-            sleep(3000);
+            sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
