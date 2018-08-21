@@ -6,10 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static java.lang.Thread.sleep;
-
 public class LinkedinLoginTest {
 
     WebDriver browser;
