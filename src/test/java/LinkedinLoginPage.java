@@ -36,14 +36,9 @@ public class LinkedinLoginPage extends BasePage {
         return new LinkedinLoginSubmitPage(browser);
     }
 
-    public LinkedinForgotPasswordPage loginReturnForgotPasswordPage() {
+    public LinkedinRequestPasswordResetPage clickOnForgotPasswordLink() {
         forgotPasswordLink.click();
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new LinkedinForgotPasswordPage(browser);
+        return new LinkedinRequestPasswordResetPage(browser);
     }
 
     public LinkedinHomePage loginReturnHomePage(String userEmail, String userPass) {
