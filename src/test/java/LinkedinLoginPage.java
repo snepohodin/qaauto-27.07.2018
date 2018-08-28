@@ -7,6 +7,9 @@ import static java.lang.Thread.sleep;
 
 public class LinkedinLoginPage extends BasePage {
 
+    @FindBy(xpath = "//a[@class='link-forgot-password']")
+    private WebElement forgotPasswordLink;
+
     @FindBy(xpath = "//input[@id ='login-email']")
     private WebElement userEmailField;
 
@@ -31,6 +34,16 @@ public class LinkedinLoginPage extends BasePage {
             e.printStackTrace();
         }
         return new LinkedinLoginSubmitPage(browser);
+    }
+
+    public LinkedinForgotPasswordPage loginReturnForgotPasswordPage() {
+        forgotPasswordLink.click();
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new LinkedinForgotPasswordPage(browser);
     }
 
     public LinkedinHomePage loginReturnHomePage(String userEmail, String userPass) {
