@@ -4,6 +4,7 @@ import util.GMailService;
 public abstract class BasePage {
     protected WebDriver browser;
     protected GMailService gMailService;
+    protected LinkedinRequestPasswordResetPage resetPasswordLink;
 
     public String getCurrentPageTitle() {
         return browser.getTitle();

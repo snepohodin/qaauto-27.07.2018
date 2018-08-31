@@ -5,8 +5,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static java.lang.Thread.sleep;
-
 public class LinkedinResetPasswordTest {
 
     WebDriver browser;
@@ -35,18 +33,13 @@ public class LinkedinResetPasswordTest {
         LinkedinPasswordResetSubmitPage linkedinPasswordResetSubmitPage = linkedinRequestPasswordResetPage.findAccount("rdmntest@gmail.com");
         Assert.assertTrue(linkedinPasswordResetSubmitPage.isLoaded(), "PasswordResetSubmitPage page is not loaded.");
 
-        //ДЗ: погуглить как взять строку в строке, сейчас все находится в методе find account
-
         LinkedinSetNewPasswordPage linkedinSetNewPasswordPage = linkedinPasswordResetSubmitPage.navigateToLinkFromEmail();
         Assert.assertTrue(linkedinSetNewPasswordPage.isLoaded(),"SetNewPasswordPage is not loaded.");
 
-//        LinkedinPasswordResetPage linkedinPasswordResetPage = new LinkedinPasswordResetPage(browser);
-//        Assert.assertTrue(linkedinPasswordResetPage.isLoaded(),"'Password reset' page is not loaded.");
+        LinkedinPasswordResetSuccessPage linkedinPasswordResetSuccessPage = linkedinSetNewPasswordPage.changePassword("July333#", "July333#");
+        Assert.assertTrue(linkedinPasswordResetSuccessPage.isLoaded(),"'Password reset success' page is not loaded.");
 
-//        LinkedinPasswordResetSuccessPage linkedinPasswordResetSuccessPage = linkedinPasswordResetPage.changePassword("July333#", "July333#");
-//        Assert.assertTrue(linkedinPasswordResetSuccessPage.isLoaded(),"'Password reset success' page is not loaded.");
-//
-//        LinkedinHomePage linkedinHomePage = linkedinPasswordResetSuccessPage.returnHomePage();
-//        Assert.assertTrue(linkedinHomePage.isLoaded(),"Home page is not loaded.");
+        LinkedinHomePage linkedinHomePage = linkedinPasswordResetSuccessPage.returnHomePage();
+        Assert.assertTrue(linkedinHomePage.isLoaded(),"Home page is not loaded.");
     }
 }
