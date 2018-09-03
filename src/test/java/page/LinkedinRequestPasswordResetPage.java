@@ -30,7 +30,7 @@ public class LinkedinRequestPasswordResetPage extends BasePage {
     }
 
     /**
-     * Method for verification that page was loaded.
+     * Verification that page was loaded.
      * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
@@ -39,10 +39,9 @@ public class LinkedinRequestPasswordResetPage extends BasePage {
                 && getCurrentPageUrl().contains("/request-password-reset");
     }
 
-
     /**
-     * Method which returns LinkedinPasswordResetSubmitPage after
-     * @param userEmail - type your email here, which should be used for verification of reset password link
+     * PageFactory which returns LinkedinPasswordResetSubmitPage after gMailService connection
+     * @param userEmail - type your email address here to connect
      */
     public LinkedinPasswordResetSubmitPage findAccount(String userEmail) {
         gMailService.connect();

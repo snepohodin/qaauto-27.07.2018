@@ -32,7 +32,7 @@ public class LinkedinSetNewPasswordPage extends BasePage {
     }
 
     /**
-     * Method for verification that page was loaded.
+     * Verification that page was loaded.
      * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
@@ -40,7 +40,6 @@ public class LinkedinSetNewPasswordPage extends BasePage {
                 && getCurrentPageTitle().contains("Reset")
                 && getCurrentPageUrl().contains("password-reset");
     }
-
 
     /**
      * Page Factory which returns next page(LinkedinPasswordResetSuccessPage) after the password was changed.

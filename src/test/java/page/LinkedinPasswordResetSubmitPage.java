@@ -25,7 +25,7 @@ public class LinkedinPasswordResetSubmitPage extends BasePage {
     }
 
     /**
-     * Method for verification that page was loaded.
+     * Verification that page was loaded.
      * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
@@ -34,11 +34,9 @@ public class LinkedinPasswordResetSubmitPage extends BasePage {
                 && getCurrentPageUrl().contains("/rp/request-password-reset-submit");
     }
 
+
     /**
-     * Method which takes and returns a link from email, after resetting the password
-     * messageSubject - subject(summary) of waiting email
-     * messageTo - email which should receive an email
-     * messageFrom - email from which to wait for a letter
+     * Page Factory which returns next page(LinkedinSetNewPasswordPage), taking a resetPasswordLink and going on it
      */
     public LinkedinSetNewPasswordPage navigateToLinkFromEmail() {
         String messageSubject = "here's the link to reset your password";

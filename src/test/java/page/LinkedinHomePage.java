@@ -31,7 +31,7 @@ public class LinkedinHomePage extends BasePage {
     }
 
     /**
-     * Method for verification that page was loaded.
+     * Verification that page was loaded.
      * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {

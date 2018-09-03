@@ -30,7 +30,7 @@ public class LinkedinLoginSubmitPage extends BasePage{
     }
 
     /**
-     * Method for verification that page was loaded.
+     * Verification that page was loaded.
      * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
@@ -40,21 +40,21 @@ public class LinkedinLoginSubmitPage extends BasePage{
     }
 
     /**
-     * Method for a text verification of webElement alertBox.
+     * Verification of webElement alertBox.
      */
     public String getAlertBoxText() {
         return alertBox.getText();
     }
 
     /**
-     * Method for a text verification of webElement userEmailValidationText.
+     * Verification of webElement userEmailValidationText.
      */
     public String getUserEmailValidationText() {
         return userEmailValidationText.getText();
     }
 
     /**
-     * Method for a text verification of webElement userPasswordValidationText.
+     * Verification of webElement userPasswordValidationText.
      */
     public String getUserPasswordValidationText() {
         return userPasswordValidationText.getText();

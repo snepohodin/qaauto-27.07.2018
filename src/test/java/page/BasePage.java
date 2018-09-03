@@ -23,21 +23,21 @@ public abstract class BasePage {
     }
 
     /**
-     * Method for taking current page title.
+     * Taking current page title.
      */
     public String getCurrentPageTitle() {
         return browser.getTitle();
     }
 
     /**
-     * Method for taking current page URL.
+     * Taking current page URL.
      */
     public String getCurrentPageUrl() {
         return browser.getCurrentUrl();
     }
 
     /**
-     * Abstract method for verification that page was loaded.
+     * Verification that current page was loaded.
      */
     public abstract boolean isLoaded();
 }

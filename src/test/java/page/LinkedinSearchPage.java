@@ -31,7 +31,7 @@ public class LinkedinSearchPage extends BasePage {
     }
 
     /**
-     * Method for verification that page was loaded.
+     * Verification that page was loaded.
      * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
@@ -41,7 +41,7 @@ public class LinkedinSearchPage extends BasePage {
     }
 
     /**
-     * Method for counting a number of search results.
+     * Counting a number of search results.
      */
     public int getSearchResultsCount() {
         return searchResults.size();

@@ -77,7 +77,7 @@ public class LinkedinLoginPage extends BasePage {
     }
 
     /**
-     * Method for verification that page was loaded.
+     * Verification that page was loaded.
      * Used getCurrentPageTitle method from BasePage.
      */
     public boolean isLoaded() {
