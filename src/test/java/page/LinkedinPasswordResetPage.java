@@ -1,10 +1,12 @@
+package page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static java.lang.Thread.sleep;
-
+/**
+ * Page Object class for LinkedinPasswordResetPage
+ */
 public class LinkedinPasswordResetPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='newPassword']")
@@ -16,19 +18,20 @@ public class LinkedinPasswordResetPage extends BasePage {
     @FindBy(xpath = "//button[@id='reset-password-submit-button']")
     private WebElement submitButton;
 
+    /**
+     * Constructor of LinkedinPasswordResetPage class.
+     * @param browser - WebDriver instance from test
+     */
     public LinkedinPasswordResetPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(newPasswordField, 10);
     }
 
-
-    public LinkedinPasswordResetSuccessPage changePassword(String newPassword, String confirmNewPassword ) {
-        newPasswordField.sendKeys(newPassword);
-        confirmPasswordField.sendKeys(confirmNewPassword);
-        submitButton.click();
-        return new LinkedinPasswordResetSuccessPage(browser);
-    }
-
+    /**
+     * Method for verification that page was loaded.
+     * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
+     */
     public boolean isLoaded() {
         return newPasswordField.isDisplayed()
                 && getCurrentPageTitle().contains("Reset")

@@ -10,6 +10,9 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Class for connection to your email to verify messages from it
+ */
 public class GMailService {
     String host = "imap.gmail.com";
     String user;
@@ -40,8 +43,8 @@ public class GMailService {
      * Default util.GMailService constructor with predefined user/pass credentials
      */
     public GMailService(){
-        this.user = "postoltest@gmail.com";
-        this.pass = "q12345678T";
+        this.user = "rdmntest@gmail.com";
+        this.pass = "0131223689";
     }
 
     /**
@@ -172,7 +175,6 @@ public class GMailService {
                     return s;
             }
         }
-
         return null;
     }
 

@@ -1,3 +1,5 @@
+package test;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -5,6 +7,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import page.LinkedinHomePage;
+import page.LinkedinLoginPage;
+import page.LinkedinLoginSubmitPage;
+import page.LinkedinSearchPage;
 
 public class LinkedinLoginTest {
 
@@ -88,23 +94,5 @@ public class LinkedinLoginTest {
 
         Assert.assertEquals(linkedinLoginSubmitPage.getUserPasswordValidationText(), userPassValidationText,
                 "userPassword field has wrong validation message text.");
-    }
-
-    @Test(dataProvider = "validFieldsCombination")
-    public void validateSearchField(String userEmail, String userPass) {
-        linkedinLoginPage.loginReturnHomePage(userEmail, userPass);
-        LinkedinHomePage linkedinHomePage = new LinkedinHomePage(browser);
-
-        Assert.assertTrue(linkedinHomePage.isLoaded(), "Home page is not loaded.");
-
-        linkedinHomePage.homePageReturnSearchPage("hr");
-        LinkedinSearchPage linkedinSearchPage = new LinkedinSearchPage(browser);
-
-        Assert.assertTrue(linkedinSearchPage.isLoaded(),"Search page is not loaded.");
-
-        linkedinSearchPage.scrollDown();
-
-        Assert.assertTrue(linkedinSearchPage.searchResultsCount(),"There are no 10 search results.");
-        Assert.assertTrue(linkedinSearchPage.searchTermVerification(),"There are no 'hr' searchterm here");
     }
 }

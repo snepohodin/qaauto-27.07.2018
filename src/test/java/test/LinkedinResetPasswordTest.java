@@ -1,9 +1,14 @@
+package test;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import page.*;
+
+import static java.lang.Thread.sleep;
 
 public class LinkedinResetPasswordTest {
 
@@ -24,8 +29,8 @@ public class LinkedinResetPasswordTest {
     }
 
     @Test
-    public void basicForgotPasswordTest () {
-        Assert.assertTrue(linkedinLoginPage.isLoaded(), "LinkedinLoginPage is not loaded");
+    public void basicForgotPasswordTest () throws InterruptedException {
+        Assert.assertTrue(linkedinLoginPage.isLoaded(), "page.LinkedinLoginPage is not loaded");
 
         LinkedinRequestPasswordResetPage linkedinRequestPasswordResetPage = linkedinLoginPage.clickOnForgotPasswordLink();
         Assert.assertTrue(linkedinRequestPasswordResetPage.isLoaded(),"'RequestPasswordResetPage' page is not loaded.");
@@ -36,10 +41,10 @@ public class LinkedinResetPasswordTest {
         LinkedinSetNewPasswordPage linkedinSetNewPasswordPage = linkedinPasswordResetSubmitPage.navigateToLinkFromEmail();
         Assert.assertTrue(linkedinSetNewPasswordPage.isLoaded(),"SetNewPasswordPage is not loaded.");
 
-        LinkedinPasswordResetSuccessPage linkedinPasswordResetSuccessPage = linkedinSetNewPasswordPage.changePassword("July333#", "July333#");
+        page.LinkedinPasswordResetSuccessPage linkedinPasswordResetSuccessPage = linkedinSetNewPasswordPage.changePassword("July333#", "July333#");
         Assert.assertTrue(linkedinPasswordResetSuccessPage.isLoaded(),"'Password reset success' page is not loaded.");
 
-        LinkedinHomePage linkedinHomePage = linkedinPasswordResetSuccessPage.returnHomePage();
+        page.LinkedinHomePage linkedinHomePage = linkedinPasswordResetSuccessPage.returnHomePage();
         Assert.assertTrue(linkedinHomePage.isLoaded(),"Home page is not loaded.");
     }
 }
