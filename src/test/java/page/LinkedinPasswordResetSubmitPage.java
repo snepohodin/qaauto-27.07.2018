@@ -26,7 +26,7 @@ public class LinkedinPasswordResetSubmitPage extends BasePage {
 
     /**
      * Verification that page was loaded.
-     * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
+     * @return - resendLinkButton.isDisplayed, getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
         return resendLinkButton.isDisplayed()
@@ -37,6 +37,7 @@ public class LinkedinPasswordResetSubmitPage extends BasePage {
 
     /**
      * Page Factory which returns next page(LinkedinSetNewPasswordPage), taking a resetPasswordLink and going on it
+     * @return - LinkedinSetNewPasswordPage Page Object
      */
     public LinkedinSetNewPasswordPage navigateToLinkFromEmail() {
         String messageSubject = "here's the link to reset your password";

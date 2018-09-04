@@ -29,9 +29,10 @@ public class LinkedinRequestPasswordResetPage extends BasePage {
         waitUntilElementIsVisible(findAccountButton, 10);
     }
 
+
     /**
      * Verification that page was loaded.
-     * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
+     * @return - userNameField.isDisplayed, getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
         return userNameField.isDisplayed()
@@ -42,6 +43,7 @@ public class LinkedinRequestPasswordResetPage extends BasePage {
     /**
      * PageFactory which returns LinkedinPasswordResetSubmitPage after gMailService connection
      * @param userEmail - type your email address here to connect
+     * @return - LinkedinPasswordResetSubmitPage page object
      */
     public LinkedinPasswordResetSubmitPage findAccount(String userEmail) {
         gMailService.connect();

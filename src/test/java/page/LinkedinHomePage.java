@@ -32,7 +32,7 @@ public class LinkedinHomePage extends BasePage {
 
     /**
      * Verification that page was loaded.
-     * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
+     * @return - profileNavigationItem.isDisplayed, getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
         return profileNavigationItem.isDisplayed()

@@ -33,7 +33,7 @@ public class LinkedinSetNewPasswordPage extends BasePage {
 
     /**
      * Verification that page was loaded.
-     * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
+     * @return - newPasswordField.isDisplayed, getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
         return newPasswordField.isDisplayed()
@@ -45,6 +45,7 @@ public class LinkedinSetNewPasswordPage extends BasePage {
      * Page Factory which returns next page(LinkedinPasswordResetSuccessPage) after the password was changed.
      * @param newPassword - field for a new password.
      * @param confirmNewPassword - field where you should to repeat a new password.
+     * @return - LinkedinPasswordResetSuccessPage page object
      */
     public LinkedinPasswordResetSuccessPage changePassword(String newPassword, String confirmNewPassword ) {
         newPasswordField.sendKeys(newPassword);

@@ -36,6 +36,7 @@ public class LinkedinLoginPage extends BasePage {
      * Page Factory which returns next page(LinkedinLoginSubmitPage) after login was done
      * @param userEmail - user email
      * @param userPass - user password
+     * @return - LinkedinLoginSubmitPage Page Object
      */
     public LinkedinLoginSubmitPage loginReturnLoginSubmitPage(String userEmail, String userPass) {
         userEmailField.sendKeys(userEmail);
@@ -46,6 +47,7 @@ public class LinkedinLoginPage extends BasePage {
 
     /**
      * Page Factory which returns next page(LinkedinRequestPasswordResetPage) after clicking on forgotPasswordLink
+     * @return - LinkedinRequestPasswordResetPage Page Object
      */
     public LinkedinRequestPasswordResetPage clickOnForgotPasswordLink() {
         forgotPasswordLink.click();
@@ -56,6 +58,7 @@ public class LinkedinLoginPage extends BasePage {
      * Page Factory which returns next page(LinkedinHomePage) after clicking on signInButton
      * @param userEmail - user email
      * @param userPass - user password
+     * @return - LinkedinHomePage Page Object
      */
     public LinkedinHomePage loginReturnHomePage(String userEmail, String userPass) {
         userEmailField.sendKeys(userEmail);
@@ -68,6 +71,7 @@ public class LinkedinLoginPage extends BasePage {
      * Page Factory which returns next page(LinkedinLoginPage) after clicking on signInButton
      * @param userEmail - user email
      * @param userPass - user password
+     * @return - LinkedinLoginPage Page Object
      */
     public LinkedinLoginPage loginReturnLoginPage(String userEmail, String userPass) {
         userEmailField.sendKeys(userEmail);
@@ -78,7 +82,7 @@ public class LinkedinLoginPage extends BasePage {
 
     /**
      * Verification that page was loaded.
-     * Used getCurrentPageTitle method from BasePage.
+     * @return - userNameField.isDisplayed, getCurrentPageTitle method from BasePage.
      */
     public boolean isLoaded() {
         return userEmailField.isDisplayed()

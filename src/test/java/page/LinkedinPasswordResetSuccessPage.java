@@ -25,6 +25,7 @@ public class LinkedinPasswordResetSuccessPage extends BasePage {
 
     /**
      * PageFactory which navigates to the Home page after password was reset
+     * @return - LinkedinHomePage Page Object
      */
     public LinkedinHomePage returnHomePage() {
         submitButton.click();
@@ -33,7 +34,7 @@ public class LinkedinPasswordResetSuccessPage extends BasePage {
 
     /**
      * Verification that page was loaded.
-     * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
+     * @return - submitButton.isDisplayed, getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
         return submitButton.isDisplayed()

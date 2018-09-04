@@ -31,7 +31,7 @@ public class LinkedinLoginSubmitPage extends BasePage{
 
     /**
      * Verification that page was loaded.
-     * Used getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
+     * @return - alertBox.isDisplayed, getCurrentPageTitle and getCurrentPageUrl methods from BasePage.
      */
     public boolean isLoaded() {
         return alertBox.isDisplayed()
