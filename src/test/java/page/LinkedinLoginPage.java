@@ -33,16 +33,24 @@ public class LinkedinLoginPage extends BasePage {
     }
 
     /**
-     * Page Factory which returns next page(LinkedinLoginSubmitPage) after login was done
-     * @param userEmail - user email
-     * @param userPass - user password
-     * @return - LinkedinLoginSubmitPage Page Object
+     * Method that enters userEmail/userPassword and click on signIn button.
+     * @param userEmail - String with user email.
+     * @param userPass - String with user password.
+     * @param <T> - Generic type to return corresponding pageObject.
+     * @return either LinkedinHomePage or LinkedinLoginSubmitPage or LinkedinLoginPage pageObject.
      */
-    public LinkedinLoginSubmitPage loginReturnLoginSubmitPage(String userEmail, String userPass) {
+    public <T> T login(String userEmail, String userPass) {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPass);
         signInButton.click();
-        return new LinkedinLoginSubmitPage(browser);
+        if (getCurrentPageUrl().contains("/feed")) {
+            return (T) new LinkedinHomePage(browser);
+        }
+        if (getCurrentPageUrl().contains("uas/login-submit")) {
+            return (T) new LinkedinLoginSubmitPage(browser);
+        } else {
+            return (T) new LinkedinLoginPage(browser);
+        }
     }
 
     /**
@@ -52,32 +60,6 @@ public class LinkedinLoginPage extends BasePage {
     public LinkedinRequestPasswordResetPage clickOnForgotPasswordLink() {
         forgotPasswordLink.click();
         return new LinkedinRequestPasswordResetPage(browser);
-    }
-
-    /**
-     * Page Factory which returns next page(LinkedinHomePage) after clicking on signInButton
-     * @param userEmail - user email
-     * @param userPass - user password
-     * @return - LinkedinHomePage Page Object
-     */
-    public LinkedinHomePage loginReturnHomePage(String userEmail, String userPass) {
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPass);
-        signInButton.click();
-        return new LinkedinHomePage(browser);
-    }
-
-    /**
-     * Page Factory which returns next page(LinkedinLoginPage) after clicking on signInButton
-     * @param userEmail - user email
-     * @param userPass - user password
-     * @return - LinkedinLoginPage Page Object
-     */
-    public LinkedinLoginPage loginReturnLoginPage(String userEmail, String userPass) {
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPass);
-        signInButton.click();
-        return new LinkedinLoginPage(browser);
     }
 
     /**

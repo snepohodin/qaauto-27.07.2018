@@ -13,8 +13,10 @@ public abstract class BasePage {
     protected static GMailService gMailService = new GMailService();
 
     /**
+     * Waiting until element is visible
      * @param webElement - web element which should be found on the page.
      * @param timeOutInSeconds - timeout for webElement waiting.
+     * @return - webElement
      */
     public WebElement waitUntilElementIsVisible (WebElement webElement, int timeOutInSeconds){
         WebDriverWait wait = new WebDriverWait(browser, timeOutInSeconds);
