@@ -1,10 +1,32 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="LoginTestSuite" verbose="1" >
-    <parameter name="browserName" value="Firefox"/>
-    <test name="LoginTests" >
-        <classes>
-            <class name="test.LinkedinLoginTest" />
-        </classes>
-    </test>
+<suite name="LinkedinLoginTest for Firefox and Chrome" verbose="1" >
+        <test name="Firefox test RU" >
+            <parameter name="browserName" value="FireFox"/>
+            <parameter name="envURL" value="https://ru.linkedin.com/"/>
+            <classes>
+                <class name="test.LinkedinLoginTest" />
+            </classes>
+        </test>
+        <test name="Firefox test DE" >
+            <parameter name="browserName" value="FireFox"/>
+            <parameter name="envURL" value="https://de.linkedin.com/"/>
+            <classes>
+                <class name="test.LinkedinLoginTest" />
+            </classes>
+        </test>
+        <test name="Firefox test UA" >
+            <parameter name="browserName" value="FireFox"/>
+            <parameter name="envURL" value="https://ua.linkedin.com/"/>
+            <classes>
+                <class name="test.LinkedinLoginTest" />
+            </classes>
+        </test>
+        <test name="Chrome test default URL" >
+            <parameter name="browserName" value="Chrome"/>
+            <parameter name="envURL" value="https://ua.linkedin.com/"/>
+            <classes>
+                <class name="test.LinkedinLoginTest" />
+            </classes>
+        </test>
 </suite>

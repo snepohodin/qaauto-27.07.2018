@@ -27,9 +27,10 @@ public class LinkedinLoginTest extends BaseTest {
     @DataProvider
     public Object[][] emptyFieldsCombination() {
         return new Object[][]{
-                {"",""},
-                {"","P@ssword123"},
-                {"someone@domain.com",""}
+                {"",""}
+//                ,
+//                {"","P@ssword123"},
+//                {"someone@domain.com",""}
         };
     }
 

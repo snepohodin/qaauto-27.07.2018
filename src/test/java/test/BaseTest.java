@@ -13,9 +13,9 @@ public class BaseTest {
     WebDriver browser;
     LinkedinLoginPage linkedinLoginPage;
 
-    @Parameters("browserName")
+    @Parameters({"browserName", "envURL"})
     @BeforeMethod
-    public void beforeMethod(@Optional("firefox") String browserName) {
+    public void beforeMethod(@Optional("firefox") String browserName,@Optional("https://www.linkedin.com/") String envURL) {
         if (browserName.toLowerCase().equals("firefox")){
             browser = new FirefoxDriver();
         }
@@ -28,7 +28,63 @@ public class BaseTest {
                 e.printStackTrace();
             }
         }
-        browser.get("https://www.linkedin.com/");
+        if (envURL.toLowerCase().equals("https://ua.linkedin.com/")){
+            browser.get("https://ua.linkedin.com/");
+        }
+        if (envURL.toLowerCase().equals("https://ru.linkedin.com/")){
+            browser.get("https://ru.linkedin.com/");
+        }
+        if (envURL.toLowerCase().equals("https://de.linkedin.com/")){
+            browser.get("https://de.linkedin.com/");
+        } else {
+            try {
+                throw new Exception("URL "+envURL+" incorrect.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        linkedinLoginPage = new LinkedinLoginPage(browser);
+    }
+
+//    @Parameters({"browserName", "envURL"})
+//    @BeforeMethod
+//    public void beforeMethod(@Optional("firefox") String browserName,@Optional("ru.linkedin.com") String environmentUrl) {
+//        if (browserName.toLowerCase().equals("firefox")){
+//            browser = new FirefoxDriver();
+//        }
+//        if (browserName.toLowerCase().equals("chrome")){
+//            browser = new ChromeDriver();
+//        } else {
+//            try {
+//                throw new Exception("browserName "+browserName+"is not supported.");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        browser.get("https://www.linkedin.com/");
+//        linkedinLoginPage = new LinkedinLoginPage(browser);
+//    }
+
+    @Parameters("envURL")
+    public void beforeMethod2(@Optional("linkedin.com") String envURL) {
+        if (envURL.toLowerCase().equals("ua.linkedin.com")){
+            browser = new FirefoxDriver();
+            browser.get("ua.linkedin.com");
+        }
+        if (envURL.toLowerCase().equals("ru.linkedin.com")){
+            browser = new FirefoxDriver();
+            browser.get("ru.linkedin.com");
+        }
+        if (envURL.toLowerCase().equals("de.linkedin.com")){
+            browser = new FirefoxDriver();
+            browser.get("de.linkedin.com");
+        } else {
+            try {
+                throw new Exception("URL "+envURL+" incorrect.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         linkedinLoginPage = new LinkedinLoginPage(browser);
     }
 
