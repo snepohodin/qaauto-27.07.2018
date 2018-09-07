@@ -28,21 +28,7 @@ public class BaseTest {
                 e.printStackTrace();
             }
         }
-        if (envURL.toLowerCase().equals("https://ua.linkedin.com/")){
-            browser.get("https://ua.linkedin.com/");
-        }
-        if (envURL.toLowerCase().equals("https://ru.linkedin.com/")){
-            browser.get("https://ru.linkedin.com/");
-        }
-        if (envURL.toLowerCase().equals("https://de.linkedin.com/")){
-            browser.get("https://de.linkedin.com/");
-        } else {
-            try {
-                throw new Exception("URL "+envURL+" incorrect.");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        browser.get(envURL);
         linkedinLoginPage = new LinkedinLoginPage(browser);
     }
 
